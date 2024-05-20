@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:onet_dental/component/colors.dart';
 import 'package:onet_dental/component/util.dart';
 
 class Score extends StatefulWidget {

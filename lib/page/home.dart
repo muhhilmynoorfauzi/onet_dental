@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:onet_dental/component/colors.dart';
 import 'package:onet_dental/component/util.dart';
 import 'package:onet_dental/page/games/page_game_1.dart';
 import 'package:onet_dental/page/score.dart';
