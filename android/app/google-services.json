@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437594142152",
+    "project_id": "onet-dental-5503c",
+    "storage_bucket": "onet-dental-5503c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437594142152:android:67a1944eed11b3adf7fcfd",
+        "android_client_info": {
+          "package_name": "com.dental.onet_dental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhh9t4WBi4YrmEg-FhaA-oLsVbYBqUCng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

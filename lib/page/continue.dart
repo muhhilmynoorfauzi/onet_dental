@@ -4,17 +4,17 @@ import 'package:onet_dental/component/transition.dart';
 import 'package:onet_dental/component/util.dart';
 import 'package:onet_dental/database/game_db.dart';
 import 'package:onet_dental/model/game_model.dart';
-import 'package:onet_dental/page/examples/example2.dart';
+import 'package:onet_dental/page/games/page_game.dart';
 
-class ScorePage extends StatefulWidget {
-  const ScorePage({Key? key}) : super(key: key);
+class ContinuePage extends StatefulWidget {
+  const ContinuePage({Key? key}) : super(key: key);
 
   @override
-  State<ScorePage> createState() => _ScorePageState();
+  State<ContinuePage> createState() => _ContinuePageState();
 }
 
-class _ScorePageState extends State<ScorePage> {
-    List<GameModel> completedGames = [];
+class _ContinuePageState extends State<ContinuePage> {
+  List<GameModel> completedGames = [];
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _ScorePageState extends State<ScorePage> {
     final gamesFromDB = await gameDB.fetchAll();
     setState(() {
       final allGames = gamesFromDB;
-      completedGames = allGames.where((game) => game.complete).toList();
+      completedGames = allGames.where((game) => !game.complete).toList();
     });
   }
 
@@ -52,14 +52,8 @@ class _ScorePageState extends State<ScorePage> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.navigate_before_rounded, color: Colors.white, size: 30),
         ),
-        title: const Text('Score', style: TextStyle(color: Colors.white)),
+        title: const Text('Continue', style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        /*actions: [
-          IconButton(
-            onPressed: () => Navigator.push(context, SlideTransition1(const AddScorePage())),
-            icon: const Icon(Icons.add),
-          ),
-        ],*/
       ),
       body: Center(
         child: ListView.builder(
@@ -72,7 +66,7 @@ class _ScorePageState extends State<ScorePage> {
               margin: const EdgeInsets.only(bottom: 10, top: 5),
               width: lebar(context) / 2,
               child: Card(
-                color: Colors.grey,
+                color: Colors.green,
                 margin: EdgeInsets.zero,
                 child: Row(
                   children: [
@@ -90,9 +84,46 @@ class _ScorePageState extends State<ScorePage> {
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () => deleteGame(game.id),
-                      icon: const Icon(Icons.delete, color: Colors.white),
+                    TextButton(
+                      onPressed: () {
+                        if (game.score == 0) {
+                          Navigator.pushReplacement(
+                            context,
+                            SlideTransition1(
+                              PageGame(colRow: 4, timeLong: 10, level: 1, idContinue: game.id, score: 0),
+                            ),
+                          );
+                        } else if (game.score == 20) {
+                          Navigator.pushReplacement(
+                            context,
+                            SlideTransition1(
+                              PageGame(colRow: 8, timeLong: 15, level: 2, idContinue: game.id, score: 20),
+                            ),
+                          );
+                        } else if (game.score == 40) {
+                          Navigator.pushReplacement(
+                            context,
+                            SlideTransition1(
+                              PageGame(colRow: 10, timeLong: 20, level: 3, idContinue: game.id, score: 40),
+                            ),
+                          );
+                        } else if (game.score == 60) {
+                          Navigator.pushReplacement(
+                            context,
+                            SlideTransition1(
+                              PageGame(colRow: 12, timeLong: 25, level: 4, idContinue: game.id, score: 60),
+                            ),
+                          );
+                        } else if (game.score == 80) {
+                          Navigator.pushReplacement(
+                            context,
+                            SlideTransition1(
+                              PageGame(colRow: 12, timeLong: 30, level: 5, idContinue: game.id, score: 80),
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text('Lanjutkan', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 ),

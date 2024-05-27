@@ -1,0 +1,37 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "onet-dental-5503c",
+          "appId": "1:437594142152:android:67a1944eed11b3adf7fcfd",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "onet-dental-5503c",
+          "configurations": {
+            "android": "1:437594142152:android:67a1944eed11b3adf7fcfd",
+            "ios": "1:437594142152:ios:2082909177a83aa3f7fcfd",
+            "web": "1:437594142152:web:17ad0e0b8fdfd793f7fcfd"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
