@@ -1,4 +1,4 @@
-// import 'dart:html' as html;
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onet_dental/component/util.dart';
@@ -6,12 +6,12 @@ import 'package:onet_dental/component/util.dart';
 class Download extends StatelessWidget {
   const Download({super.key});
 
-  final String urlDownload = 'https://storage.googleapis.com/onet-dental-5503c.appspot.com/apk/nurul.apk';
+  final String urlDownload = 'https://storage.googleapis.com/little-mazedent.appspot.com/apk/Little%20Mazedent.apk';
   final String urlImage =
-      'https://firebasestorage.googleapis.com/v0/b/onet-dental-5503c.appspot.com/o/assets%2Fbg_download.png?alt=media&token=188f652a-2b89-4b4d-8954-9596b233df88';
+      'https://firebasestorage.googleapis.com/v0/b/little-mazedent.appspot.com/o/assets%2Fbg_download.png?alt=media&token=2bc2200a-091b-435a-95bd-58234b74bb8c';
 
   void download() {
-    // html.window.open(urlDownload, '_blank');
+    html.window.open(urlDownload, '_blank');
   }
 
   @override
@@ -39,7 +39,7 @@ class Download extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Selamat datang di \nMaze Game for Nurul', style: GoogleFonts.poppins(color: primary, fontSize: 30), textAlign: TextAlign.center),
+                            Text('Selamat datang di \nLittle Mazedent', style: GoogleFonts.poppins(color: primary, fontSize: 30), textAlign: TextAlign.center),
                             const SizedBox(height: 20),
                             TextButton.icon(
                               style: TextButton.styleFrom(backgroundColor: primary, padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
@@ -70,7 +70,7 @@ class Download extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Selamat datang di \nMaze Game for Nurul', style: GoogleFonts.poppins(color: primary, fontSize: 50)),
+                              Text('Selamat datang di \nLittle Mazedent', style: GoogleFonts.poppins(color: primary, fontSize: 50)),
                               const SizedBox(height: 20),
                               TextButton.icon(
                                 style: TextButton.styleFrom(backgroundColor: primary, padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20)),

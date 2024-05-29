@@ -47,29 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB3fHQToDv3tWFGn1JM3iaOrtx-NDkzeIU',
-    appId: '1:437594142152:web:17ad0e0b8fdfd793f7fcfd',
-    messagingSenderId: '437594142152',
-    projectId: 'onet-dental-5503c',
-    authDomain: 'onet-dental-5503c.firebaseapp.com',
-    storageBucket: 'onet-dental-5503c.appspot.com',
-    measurementId: 'G-DZLYSQ5YV7',
+    apiKey: 'AIzaSyCzcuWW6yKIqshv_U_rWUOAxDJe9iQ4Pus',
+    appId: '1:601158958002:web:cb077804e3916248ef42ab',
+    messagingSenderId: '601158958002',
+    projectId: 'little-mazedent',
+    authDomain: 'little-mazedent.firebaseapp.com',
+    storageBucket: 'little-mazedent.appspot.com',
+    measurementId: 'G-MBJ1NREQZ7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDhh9t4WBi4YrmEg-FhaA-oLsVbYBqUCng',
-    appId: '1:437594142152:android:67a1944eed11b3adf7fcfd',
-    messagingSenderId: '437594142152',
-    projectId: 'onet-dental-5503c',
-    storageBucket: 'onet-dental-5503c.appspot.com',
+    apiKey: 'AIzaSyCoRieKeVcndpJBimW7oHpW1ivIFapwR4E',
+    appId: '1:601158958002:android:c4221e87f6435794ef42ab',
+    messagingSenderId: '601158958002',
+    projectId: 'little-mazedent',
+    storageBucket: 'little-mazedent.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6eFQarvZLee3Yv9tl0KX9BmYeMKgeYy8',
-    appId: '1:437594142152:ios:2082909177a83aa3f7fcfd',
-    messagingSenderId: '437594142152',
-    projectId: 'onet-dental-5503c',
-    storageBucket: 'onet-dental-5503c.appspot.com',
+    apiKey: 'AIzaSyBMoCSnpxGxkGDwqpWvrJiYv2vWcUb-428',
+    appId: '1:601158958002:ios:68c82da71f7af1f9ef42ab',
+    messagingSenderId: '601158958002',
+    projectId: 'little-mazedent',
+    storageBucket: 'little-mazedent.appspot.com',
     iosBundleId: 'com.dental.onetDental',
   );
+
 }

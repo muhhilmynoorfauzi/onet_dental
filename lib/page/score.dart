@@ -14,7 +14,7 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
-    List<GameModel> completedGames = [];
+  List<GameModel> completedGames = [];
 
   @override
   void initState() {
@@ -23,12 +23,8 @@ class _ScorePageState extends State<ScorePage> {
   }
 
   void fetchGames() async {
-    final gameDB = GameDB();
-    final gamesFromDB = await gameDB.fetchAll();
-    setState(() {
-      final allGames = gamesFromDB;
-      completedGames = allGames.where((game) => game.complete).toList();
-    });
+    final allGames = await GameDB().fetchAll();
+    setState(() => completedGames = allGames.where((game) => game.complete).toList());
   }
 
   String formatDateTime(DateTime dateTime) {
@@ -54,53 +50,64 @@ class _ScorePageState extends State<ScorePage> {
         ),
         title: const Text('Score', style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        /*actions: [
-          IconButton(
-            onPressed: () => Navigator.push(context, SlideTransition1(const AddScorePage())),
-            icon: const Icon(Icons.add),
-          ),
-        ],*/
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount: completedGames.length,
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          itemBuilder: (context, index) {
-            final game = completedGames[index];
-            return Container(
-              height: 50,
-              margin: const EdgeInsets.only(bottom: 10, top: 5),
-              width: lebar(context) / 2,
-              child: Card(
-                color: Colors.grey,
-                margin: EdgeInsets.zero,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(formatDateTime(game.date)),
-                            Text(game.score.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+      body: (completedGames.isNotEmpty)
+          ? Center(
+              child: ListView.builder(
+                itemCount: completedGames.length,
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                itemBuilder: (context, index) {
+                  final game = completedGames[index];
+                  return Container(
+                    height: 50,
+                    margin: const EdgeInsets.only(bottom: 10, top: 5),
+                    width: lebar(context) / 2,
+                    child: Card(
+                      color: Colors.grey,
+                      margin: EdgeInsets.zero,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(formatDateTime(game.date)),
+                                  Text(game.score.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => deleteGame(game.id),
+                            icon: const Icon(Icons.delete, color: Colors.white),
+                          )
+                        ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () => deleteGame(game.id),
-                      icon: const Icon(Icons.delete, color: Colors.white),
-                    )
+                  );
+                },
+              ),
+            )
+          : Center(
+              child: SizedBox(
+                height: tinggi(context),
+                width: lebar(context) / 2,
+                // color: Colors.red,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Text('Tidak Ada data simpanan'),
+                    ),
+                    Expanded(child: Image.asset('assets/bingung.jpeg'))
                   ],
                 ),
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }

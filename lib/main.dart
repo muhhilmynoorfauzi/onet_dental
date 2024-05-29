@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FKG',
+      title: 'Little Mazedent',
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
       ),
       home:
           // const AddScorePage(),
-          const Home(),
-          // const Download(),
+          // const Home(),
+      const Download(),
     );
   }
 }

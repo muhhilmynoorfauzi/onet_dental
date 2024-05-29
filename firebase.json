@@ -3,18 +3,18 @@
     "platforms": {
       "android": {
         "default": {
-          "projectId": "onet-dental-5503c",
-          "appId": "1:437594142152:android:67a1944eed11b3adf7fcfd",
+          "projectId": "little-mazedent",
+          "appId": "1:601158958002:android:c4221e87f6435794ef42ab",
           "fileOutput": "android/app/google-services.json"
         }
       },
       "dart": {
         "lib/firebase_options.dart": {
-          "projectId": "onet-dental-5503c",
+          "projectId": "little-mazedent",
           "configurations": {
-            "android": "1:437594142152:android:67a1944eed11b3adf7fcfd",
-            "ios": "1:437594142152:ios:2082909177a83aa3f7fcfd",
-            "web": "1:437594142152:web:17ad0e0b8fdfd793f7fcfd"
+            "android": "1:601158958002:android:c4221e87f6435794ef42ab",
+            "ios": "1:601158958002:ios:68c82da71f7af1f9ef42ab",
+            "web": "1:601158958002:web:cb077804e3916248ef42ab"
           }
         }
       }

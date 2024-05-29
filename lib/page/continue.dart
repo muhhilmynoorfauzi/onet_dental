@@ -23,12 +23,8 @@ class _ContinuePageState extends State<ContinuePage> {
   }
 
   void fetchGames() async {
-    final gameDB = GameDB();
-    final gamesFromDB = await gameDB.fetchAll();
-    setState(() {
-      final allGames = gamesFromDB;
-      completedGames = allGames.where((game) => !game.complete).toList();
-    });
+    final gamesFromDB = await GameDB().fetchAll();
+    setState(() => completedGames = gamesFromDB.where((game) => !game.complete).toList());
   }
 
   String formatDateTime(DateTime dateTime) {
@@ -39,7 +35,7 @@ class _ContinuePageState extends State<ContinuePage> {
   void deleteGame(int id) async {
     final gameDB = GameDB();
     await gameDB.delete(id);
-    fetchGames(); // Refresh the list after deletion
+    fetchGames();
   }
 
   @override
@@ -55,83 +51,100 @@ class _ContinuePageState extends State<ContinuePage> {
         title: const Text('Continue', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount: completedGames.length,
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          itemBuilder: (context, index) {
-            final game = completedGames[index];
-            return Container(
-              height: 50,
-              margin: const EdgeInsets.only(bottom: 10, top: 5),
-              width: lebar(context) / 2,
-              child: Card(
-                color: Colors.green,
-                margin: EdgeInsets.zero,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(formatDateTime(game.date)),
-                            Text(game.score.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+      body: (completedGames.isNotEmpty)
+          ? Center(
+              child: ListView.builder(
+                itemCount: completedGames.length,
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                itemBuilder: (context, index) {
+                  final game = completedGames[index];
+                  return Container(
+                    height: 50,
+                    margin: const EdgeInsets.only(bottom: 10, top: 5),
+                    width: lebar(context) / 2,
+                    child: Card(
+                      color: Colors.green,
+                      margin: EdgeInsets.zero,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(formatDateTime(game.date)),
+                                  Text(game.score.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              if (game.score == 0) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  SlideTransition1(
+                                    PageGame(colRow: 4, timeLong: 10, level: 1, idContinue: game.id, score: 0),
+                                  ),
+                                );
+                              } else if (game.score == 20) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  SlideTransition1(
+                                    PageGame(colRow: 8, timeLong: 15, level: 2, idContinue: game.id, score: 20),
+                                  ),
+                                );
+                              } else if (game.score == 40) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  SlideTransition1(
+                                    PageGame(colRow: 10, timeLong: 20, level: 3, idContinue: game.id, score: 40),
+                                  ),
+                                );
+                              } else if (game.score == 60) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  SlideTransition1(
+                                    PageGame(colRow: 12, timeLong: 25, level: 4, idContinue: game.id, score: 60),
+                                  ),
+                                );
+                              } else if (game.score == 80) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  SlideTransition1(
+                                    PageGame(colRow: 12, timeLong: 30, level: 5, idContinue: game.id, score: 80),
+                                  ),
+                                );
+                              }
+                            },
+                            child: const Text('Lanjutkan', style: TextStyle(color: Colors.white)),
+                          )
+                        ],
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        if (game.score == 0) {
-                          Navigator.pushReplacement(
-                            context,
-                            SlideTransition1(
-                              PageGame(colRow: 4, timeLong: 10, level: 1, idContinue: game.id, score: 0),
-                            ),
-                          );
-                        } else if (game.score == 20) {
-                          Navigator.pushReplacement(
-                            context,
-                            SlideTransition1(
-                              PageGame(colRow: 8, timeLong: 15, level: 2, idContinue: game.id, score: 20),
-                            ),
-                          );
-                        } else if (game.score == 40) {
-                          Navigator.pushReplacement(
-                            context,
-                            SlideTransition1(
-                              PageGame(colRow: 10, timeLong: 20, level: 3, idContinue: game.id, score: 40),
-                            ),
-                          );
-                        } else if (game.score == 60) {
-                          Navigator.pushReplacement(
-                            context,
-                            SlideTransition1(
-                              PageGame(colRow: 12, timeLong: 25, level: 4, idContinue: game.id, score: 60),
-                            ),
-                          );
-                        } else if (game.score == 80) {
-                          Navigator.pushReplacement(
-                            context,
-                            SlideTransition1(
-                              PageGame(colRow: 12, timeLong: 30, level: 5, idContinue: game.id, score: 80),
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text('Lanjutkan', style: TextStyle(color: Colors.white)),
-                    )
+                  );
+                },
+              ),
+            )
+          : Center(
+              child: SizedBox(
+                height: tinggi(context),
+                width: lebar(context) / 2,
+                // color: Colors.red,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Text('Tidak Ada data simpanan'),
+                    ),
+                    Expanded(child: Image.asset('assets/bingung.jpeg'))
                   ],
                 ),
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }
