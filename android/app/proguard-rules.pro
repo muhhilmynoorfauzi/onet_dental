@@ -1,0 +1,9 @@
+-keep class com.google.android.webview.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class com.github.florent37.assets_audio_player.** { *; }
+-keep class com.github.florent37.assets_audio_player_web.** { *; }
+-keep class de.blinkt.openvpn.** { *; }
+-keep class com.google.android.gms.ads.identifier.** { *; }
+-keep class com.google.ar.** { *; }
+-keep class com.google.ar.core.** { *; }
+-keep class com.google.ar.sceneform.** { *; }

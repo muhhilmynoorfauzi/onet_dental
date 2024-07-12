@@ -58,7 +58,10 @@ class _HomeState extends State<Home> {
               height: tinggi(context),
               width: tinggi(context),
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/w1.jpg'), fit: BoxFit.cover),
+                image: DecorationImage(
+                  image: AssetImage('assets/w1.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(

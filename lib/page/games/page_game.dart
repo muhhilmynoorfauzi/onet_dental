@@ -5,7 +5,9 @@ import 'package:flame/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maze/maze.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:onet_dental/component/state_manajement.dart';
 import 'package:onet_dental/component/transition.dart';
 import 'package:onet_dental/component/util.dart';
@@ -29,10 +31,12 @@ class PageGame extends StatefulWidget {
 
 class _PageGameState extends State<PageGame> {
   double? timer = 0;
+
   // bool timeOut = false;
   bool selesai = false;
   final GameDB _gameDB = GameDB();
   var edu = '';
+  var txt = '';
 
   Future<void> delay() async {
     await Future.delayed(const Duration(seconds: 1), () => setState(() => timer = 400));
@@ -43,20 +47,25 @@ class _PageGameState extends State<PageGame> {
     delay();
     switch (widget.level) {
       case 1:
-        edu = 'assets/level1.png';
+        edu = 'assets/sikat_gigi.glb';
+        txt = 'Flouride, menyikat gigi 2 kali sehari';
       case 2:
-        edu = 'assets/level2.png';
+        edu = 'assets/gigi_rusak.glb';
+        txt = 'Makanan dan minuman manis membuat gigi rusak';
       case 3:
-        edu = 'assets/level3.png';
+        edu = 'assets/gusi_bengkak.glb';
+        txt = 'Jarang membersihkan gigi dan mulut';
       case 4:
-        edu = 'assets/level4.png';
+        edu = 'assets/bau_mulut.glb';
+        txt = 'Tidak menjaga kebersihkan gigi dan mulut';
       case 5:
-        edu = 'assets/level5.png';
+        edu = 'assets/gigi_sehat.glb';
+        txt = 'Rutin ke dokter gigi 6 bulan sekali';
     }
     super.initState();
   }
 
-  Future dialog({List<Widget>? actions, required String assetName, Widget? title}) => showDialog(
+  Future dialog({List<Widget>? actions, String? assetName, Widget? title}) => showDialog(
         context: context,
         builder: (context) => SlideFadeTransition(
           curve: Curves.elasticOut,
@@ -65,19 +74,24 @@ class _PageGameState extends State<PageGame> {
           offset: 2.5,
           direction: Direction.vertical,
           child: AlertDialog(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              content: Container(
-                width: lebar(context) / 2,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage(assetName)),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              title: title,
-              actionsPadding: const EdgeInsets.all(10),
-              contentPadding: EdgeInsets.zero,
-              actions: actions),
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            contentPadding: EdgeInsets.zero,
+            content: Container(
+              width: lebar(context) / 2,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              child: (assetName != null)
+                  ? ModelViewer(
+                      backgroundColor: Colors.transparent,
+                      src: assetName,
+                      disableZoom: false,
+                    )
+                  : const SizedBox(),
+            ),
+            title: title,
+            actionsPadding: const EdgeInsets.all(10),
+            actions: actions,
+          ),
         ),
       );
 
@@ -128,7 +142,6 @@ class _PageGameState extends State<PageGame> {
                         title: const Text('Home'),
                         task: () {
                           dialog(
-                            assetName: 'assets/player.png',
                             title: const Text(
                               'Kembali ke Home dan simpan?',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
@@ -225,22 +238,38 @@ class _PageGameState extends State<PageGame> {
                                       rows: widget.colRow,
                                       wallThickness: 5,
                                       wallColor: Colors.white,
-                                      finish: MazeItem('assets/finish.png', ImageType.asset),
+                                      finish: MazeItem(
+                                        'assets/finish.png',
+                                        ImageType.asset,
+                                      ),
                                       onFinish: () {
                                         context.read<CounterProvider>().setNotification(true);
-                                        if (widget.level == 5) {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            SlideTransition1(
-                                              HasilPage(score: widget.score + 20, idContinue: widget.idContinue),
+                                        setState(() => selesai = true);
+                                        dialog(
+                                          title: Text(
+                                            txt,
+                                            style: GoogleFonts.poppins(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                                          ),
+                                          assetName: edu,
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                if (widget.level == 5) {
+                                                  Navigator.pop(context);
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    SlideTransition1(
+                                                      HasilPage(score: widget.score + 20, idContinue: widget.idContinue),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  Navigator.pop(context);
+                                                }
+                                              },
+                                              child: const Text('Oke'),
                                             ),
-                                          );
-                                        } else {
-                                          setState(() => selesai = true);
-                                          dialog(assetName: edu, actions: [
-                                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Oke')),
-                                          ]);
-                                        }
+                                          ],
+                                        );
                                       },
                                     ),
                                   ),

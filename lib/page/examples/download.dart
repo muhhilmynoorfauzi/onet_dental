@@ -1,4 +1,4 @@
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onet_dental/component/util.dart';
@@ -7,11 +7,10 @@ class Download extends StatelessWidget {
   const Download({super.key});
 
   final String urlDownload = 'https://storage.googleapis.com/little-mazedent.appspot.com/apk/Little%20Mazedent.apk';
-  final String urlImage =
-      'https://firebasestorage.googleapis.com/v0/b/little-mazedent.appspot.com/o/assets%2Fbg_download.png?alt=media&token=2bc2200a-091b-435a-95bd-58234b74bb8c';
+  final String urlImage = 'https://firebasestorage.googleapis.com/v0/b/little-mazedent.appspot.com/o/assets%2Fbg_download.png?alt=media&token=2bc2200a-091b-435a-95bd-58234b74bb8c';
 
   void download() {
-    html.window.open(urlDownload, '_blank');
+    // html.window.open(urlDownload, '_blank');
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:onet_dental/component/util.dart';
 import 'package:onet_dental/firebase_options.dart';
 import 'package:onet_dental/page/examples/download.dart';
 import 'package:onet_dental/page/examples/example2.dart';
+import 'package:onet_dental/page/games/page_game.dart';
 import 'package:onet_dental/page/hasil.dart';
 import 'package:onet_dental/page/home.dart';
 import 'package:provider/provider.dart';
@@ -40,9 +41,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: primary),
       ),
       home:
-          // const AddScorePage(),
-          // const Home(),
-      const Download(),
+          // const Example2(),
+          const Home(),
+          // PageGame(colRow: 2, timeLong: 100, level: 5, idContinue: 0, score: 0),
+      // const Download(),
     );
   }
 }

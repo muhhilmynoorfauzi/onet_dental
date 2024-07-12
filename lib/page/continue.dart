@@ -140,7 +140,9 @@ class _ContinuePageState extends State<ContinuePage> {
                       padding: EdgeInsets.all(30),
                       child: Text('Tidak Ada data simpanan'),
                     ),
-                    Expanded(child: Image.asset('assets/bingung.jpeg'))
+                    Expanded(
+                      child: Image.asset('assets/bingung.jpeg'),
+                    )
                   ],
                 ),
               ),

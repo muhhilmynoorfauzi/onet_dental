@@ -23,7 +23,12 @@ class HasilPage extends StatelessWidget {
           alignment: Alignment.center,
           height: tinggi(context),
           width: lebar(context),
-          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/bg_hasil.png'), fit: BoxFit.cover)),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg_hasil.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
