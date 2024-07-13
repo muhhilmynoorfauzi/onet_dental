@@ -32,10 +32,11 @@ class PageGame extends StatefulWidget {
 class _PageGameState extends State<PageGame> {
   double? timer = 0;
 
-  // bool timeOut = false;
+  ScrollController controller = ScrollController();
   bool selesai = false;
   final GameDB _gameDB = GameDB();
-  var edu = '';
+  var asset3D = '';
+  var asset3D1 = '';
   var txt = '';
 
   Future<void> delay() async {
@@ -47,25 +48,27 @@ class _PageGameState extends State<PageGame> {
     delay();
     switch (widget.level) {
       case 1:
-        edu = 'assets/sikat_gigi.glb';
+        asset3D = 'assets/sikat_gigi.glb';
+        asset3D1 = 'assets/gerakan_sikat.glb';
         txt = 'Flouride, menyikat gigi 2 kali sehari';
       case 2:
-        edu = 'assets/gigi_rusak.glb';
+        asset3D = 'assets/gigi_rusak.glb';
+        asset3D1 = 'assets/menempel_digigi.glb';
         txt = 'Makanan dan minuman manis membuat gigi rusak';
       case 3:
-        edu = 'assets/gusi_bengkak.glb';
+        asset3D = 'assets/gusi_bengkak.glb';
         txt = 'Jarang membersihkan gigi dan mulut';
       case 4:
-        edu = 'assets/bau_mulut.glb';
+        asset3D = 'assets/bau_mulut.glb';
         txt = 'Tidak menjaga kebersihkan gigi dan mulut';
       case 5:
-        edu = 'assets/gigi_sehat.glb';
+        asset3D = 'assets/gigi_sehat.glb';
         txt = 'Rutin ke dokter gigi 6 bulan sekali';
     }
     super.initState();
   }
 
-  Future dialog({List<Widget>? actions, String? assetName, Widget? title}) => showDialog(
+  Future dialog({List<Widget>? actions, Widget? asset, Widget? title}) => showDialog(
         context: context,
         builder: (context) => SlideFadeTransition(
           curve: Curves.elasticOut,
@@ -80,13 +83,7 @@ class _PageGameState extends State<PageGame> {
             content: Container(
               width: lebar(context) / 2,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              child: (assetName != null)
-                  ? ModelViewer(
-                      backgroundColor: Colors.transparent,
-                      src: assetName,
-                      disableZoom: false,
-                    )
-                  : const SizedBox(),
+              child: (asset != null) ? asset : const SizedBox(),
             ),
             title: title,
             actionsPadding: const EdgeInsets.all(10),
@@ -242,34 +239,81 @@ class _PageGameState extends State<PageGame> {
                                         'assets/finish.png',
                                         ImageType.asset,
                                       ),
-                                      onFinish: () {
+                                      onFinish: () async {
                                         context.read<CounterProvider>().setNotification(true);
                                         setState(() => selesai = true);
-                                        dialog(
+                                        await dialog(
                                           title: Text(
                                             txt,
                                             style: GoogleFonts.poppins(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
                                           ),
-                                          assetName: edu,
+                                          asset: (widget.level == 1 || widget.level == 2)
+                                              ? SingleChildScrollView(
+                                                  controller: controller,
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: lebar(context) / 2,
+                                                        child: ModelViewer(
+                                                          backgroundColor: Colors.transparent,
+                                                          src: asset3D1,
+                                                          disableZoom: false,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: lebar(context) / 2,
+                                                        child: ModelViewer(
+                                                          backgroundColor: Colors.transparent,
+                                                          src: asset3D,
+                                                          disableZoom: false,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : ModelViewer(
+                                                  backgroundColor: Colors.transparent,
+                                                  src: asset3D,
+                                                  disableZoom: false,
+                                                ),
                                           actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                if (widget.level == 5) {
-                                                  Navigator.pop(context);
-                                                  Navigator.pushReplacement(
-                                                    context,
-                                                    SlideTransition1(
-                                                      HasilPage(score: widget.score + 20, idContinue: widget.idContinue),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                if (widget.level == 1 || widget.level == 2)
+                                                  Expanded(
+                                                    child: Row(
+                                                      children: [
+                                                        IconButton(
+                                                          onPressed: () => controller.animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+                                                          icon: const Icon(Icons.navigate_before_rounded, color: Colors.black),
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            controller.animateTo(lebar(context) / 2, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                                          },
+                                                          icon: const Icon(Icons.navigate_next_rounded, color: Colors.black),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  );
-                                                } else {
-                                                  Navigator.pop(context);
-                                                }
-                                              },
-                                              child: const Text('Oke'),
+                                                  ),
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context),
+                                                  child: const Text('Oke'),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         );
+                                        if (widget.level == 5) {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            SlideTransition1(
+                                              HasilPage(score: widget.score + 20, idContinue: widget.idContinue),
+                                            ),
+                                          );
+                                        }
                                       },
                                     ),
                                   ),
@@ -294,20 +338,6 @@ class _PageGameState extends State<PageGame> {
                                 ],
                               ),
                             ),
-                            /*if (timeOut)
-                              Container(
-                                color: primary,
-                                height: tinggi(context),
-                                alignment: Alignment.center,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(50)),
-                                  child: Text(
-                                    'Waktu Anda Habis',
-                                    style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 20),
-                                  ),
-                                ),
-                              ),*/
                           ],
                         ),
                       ),

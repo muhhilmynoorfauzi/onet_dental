@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       home:
           // const Example2(),
           const Home(),
-          // PageGame(colRow: 2, timeLong: 100, level: 5, idContinue: 0, score: 0),
+          // PageGame(colRow: 2, timeLong: 100, level: 2, idContinue: 0, score: 0),
       // const Download(),
     );
   }
