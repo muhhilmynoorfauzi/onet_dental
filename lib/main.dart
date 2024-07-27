@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Little Mazedent',
+      title: 'Mazedent',
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       home:
           // const Example2(),
           const Home(),
-          // PageGame(colRow: 2, timeLong: 100, level: 2, idContinue: 0, score: 0),
       // const Download(),
+      // PageGame(colRow: 2, timeLong: 100, level: 1, idContinue: 0, score: 0),
     );
   }
 }

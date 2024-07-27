@@ -104,7 +104,7 @@ class _ScorePageState extends State<ScorePage> {
                       child: Text('Tidak Ada data simpanan'),
                     ),
                     Expanded(
-                      child: Image.asset('assets/bingung.jpeg'),
+                      child: Image.asset('assets/bingung.png'),
                     )
                   ],
                 ),

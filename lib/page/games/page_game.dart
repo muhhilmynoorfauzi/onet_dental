@@ -48,11 +48,11 @@ class _PageGameState extends State<PageGame> {
     delay();
     switch (widget.level) {
       case 1:
-        asset3D = 'assets/sikat_gigi.glb';
+        asset3D = 'assets/cara_sikat_gigi.png';
         asset3D1 = 'assets/gerakan_sikat.glb';
         txt = 'Flouride, menyikat gigi 2 kali sehari';
       case 2:
-        asset3D = 'assets/gigi_rusak.glb';
+        asset3D = 'assets/makanan_manis.png';
         asset3D1 = 'assets/menempel_digigi.glb';
         txt = 'Makanan dan minuman manis membuat gigi rusak';
       case 3:
@@ -263,10 +263,9 @@ class _PageGameState extends State<PageGame> {
                                                       ),
                                                       SizedBox(
                                                         width: lebar(context) / 2,
-                                                        child: ModelViewer(
-                                                          backgroundColor: Colors.transparent,
-                                                          src: asset3D,
-                                                          disableZoom: false,
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.only(top: 20),
+                                                          child: Image.asset(asset3D),
                                                         ),
                                                       ),
                                                     ],

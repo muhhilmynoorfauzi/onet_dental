@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Little Mazedent',
+                      'Mazedent',
                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),
                     ),
                     const SizedBox(height: 20),
